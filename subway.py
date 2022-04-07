@@ -3,7 +3,7 @@ import pyautogui
 import time
 count=0
 cap=cv2.VideoCapture(0)
-tracker= cv2.legacy.TrackerCSRT_create()
+tracker= cv2.legacy.TrackerCSRT_create() #Using a Tracker to object detection
 success,img= cap.read()
 img = cv2.flip(img, 1)
 bbox= cv2.selectROI("tracking",img,False)
@@ -13,7 +13,7 @@ def drawbox(img,bbox):
     global count
     if(x>300 and y>160 and x<340 and y <320):
         count=0
-    if(x>0 and y<160):
+    if(x>0 and y<160): #Coordinates for up,down,right,left
             print("up")
             pyautogui.keyDown('up')
             pyautogui.keyUp('up')
@@ -35,10 +35,10 @@ def drawbox(img,bbox):
             time.sleep(0.001)
         
         
-    cv2.circle(img,(x,y), 10,(255, 255, 0),3)
+    cv2.circle(img,(x,y), 10,(255, 255, 0),3) #Used as a pointer to mark location
 
 while True:
-    timer= cv2.getTickCount()
+    timer= cv2.getTickCount()  
     success,img= cap.read()
     img = cv2.flip(img, 1)
     cv2.line(img,(0,160),(640,160),(0,224,19),2)
@@ -49,9 +49,10 @@ while True:
     if success:
         drawbox(img,bbox)
     else:
-        cv2.putText(img,"lost",(75,50),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,223,0),2)
+        cv2.putText(img,"lost",(75,50),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,223,0),2)  #Returns a Lost Message if the pointer coordinates are out of range
     fps=cv2.getTickFrequency()/(cv2.getTickCount()-timer)
-    cv2.putText(img,str(int(fps)),(7,50),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,223,0),2)
-    cv2.imshow("video",img)
-    if cv2.waitKey(1) == ord('q'):
+    cv2.putText(img,str(int(fps)),(7,50),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,223,0),2) #Returns Frames Per Seconds
+    cv2.imshow("video",img)  #Opens a new window for live tracking
+    if cv2.waitKey(1) == ord('q'): #Used as a termination key to terminate the program
         break
+        
