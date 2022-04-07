@@ -1,0 +1,15 @@
+--Lets Know how to install packages.
+
+Open Your Python Scripts File like you can explore in your local disk a Python Folder will be visible in Program Files Or APPData or Some Other.
+Ex:   C:\Program Files\Python310\Scripts - This is Path if it is default Download 
+Ex:   Python310\Scripts                  - Common Sub Path 
+Open a Command Propmt at that location using right click then
+
+pip install time
+pip install pyautogui
+pip install cv2
+
+Additinol Packages :
+pip install opencv-contrib-python==4.5.5.62
+
+All Set -----!!!!
